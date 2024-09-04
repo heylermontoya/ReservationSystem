@@ -1,6 +1,5 @@
 ﻿using RESERVATION_SYSTEM.Domain.Entities.Base;
 using RESERVATION_SYSTEM.Domain.Entities.reservation;
-using RESERVATION_SYSTEM.Domain.Entities.service;
 
 namespace RESERVATION_SYSTEM.Domain.Entities.historyReservation
 {

@@ -35,7 +35,7 @@ namespace RESERVATION_SYSTEM.Api.Controllers.reservation
         {
             await mediator.Send(command);
         }
-        
+
         [HttpPut()]
         public async Task UpdateReservationAsync(
             UpdateReservationCommand command
@@ -43,7 +43,7 @@ namespace RESERVATION_SYSTEM.Api.Controllers.reservation
         {
             await mediator.Send(command);
         }
-        
+
         [HttpPut("cancel")]
         public async Task UpdateReservationAsync(
             CancelReservationCommand command

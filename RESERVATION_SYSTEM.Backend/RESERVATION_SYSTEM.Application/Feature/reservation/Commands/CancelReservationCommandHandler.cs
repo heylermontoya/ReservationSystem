@@ -18,7 +18,7 @@ namespace RESERVATION_SYSTEM.Application.Feature.reservation.Commands
         )
         {
             await service.CancelReservationAsync(
-               command.Id               
+               command.Id
             );
         }
     }

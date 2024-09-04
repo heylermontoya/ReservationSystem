@@ -1,15 +1,11 @@
 ﻿using RESERVATION_SYSTEM.Domain.DTOs;
 using RESERVATION_SYSTEM.Domain.Entities.customer;
-using RESERVATION_SYSTEM.Domain.Entities.reservation;
-using RESERVATION_SYSTEM.Domain.Entities.service;
 using RESERVATION_SYSTEM.Domain.Enums;
 using RESERVATION_SYSTEM.Domain.Exceptions;
 using RESERVATION_SYSTEM.Domain.Helpers;
 using RESERVATION_SYSTEM.Domain.Ports;
 using RESERVATION_SYSTEM.Domain.QueryFilters;
-using RESERVATION_SYSTEM.Domain.Services.historyReservation;
 using RESERVATION_SYSTEM.Domain.Services.reservation;
-using RESERVATION_SYSTEM.Domain.Services.service;
 
 namespace RESERVATION_SYSTEM.Domain.Services.customer
 {
@@ -18,7 +14,7 @@ namespace RESERVATION_SYSTEM.Domain.Services.customer
     {
         protected readonly IGenericRepository<Customer> repository;
         protected readonly IQueryWrapper queryWrapper;
-        private ReservationService reservationService;
+        private readonly ReservationService reservationService;
         public CustomerService(
             IGenericRepository<Customer> repository,
             IQueryWrapper queryWrapper,
@@ -63,7 +59,7 @@ namespace RESERVATION_SYSTEM.Domain.Services.customer
                 customer => customer.Name == name
             );
 
-            if (listCustomer.Count() > 0)
+            if (listCustomer.Any())
             {
                 throw new AppException(MessagesExceptions.NameCustomerNotValid);
             }
@@ -73,7 +69,7 @@ namespace RESERVATION_SYSTEM.Domain.Services.customer
 
         public async Task UpdateCustomerAsync(
             Guid id,
-            string name, 
+            string name,
             string email,
             string phone
         )
@@ -84,7 +80,7 @@ namespace RESERVATION_SYSTEM.Domain.Services.customer
                 customer => customer.Name == name
             );
 
-            if (listCustomer.Count() > 0 && name != customer.Name)
+            if (listCustomer.Any() && name != customer.Name)
             {
                 throw new AppException(MessagesExceptions.NameCustomerNotValid);
             }
@@ -100,12 +96,9 @@ namespace RESERVATION_SYSTEM.Domain.Services.customer
         {
             Customer customer = await ObtainCustomerById(id);
 
-            //se liberan servicios asociados al usuario
             await reservationService.LiberateServicesAsync(id);
 
-            //Si se elimina un usuario, se eliminan todas las reservas asociadas y el historial asociado a esas reservas
-            //Se realiza un borrado en cascada
-            await repository.DeleteAsync(customer);            
+            await repository.DeleteAsync(customer);
         }
 
         private async Task<Customer> ObtainCustomerById(Guid id)
@@ -116,7 +109,7 @@ namespace RESERVATION_SYSTEM.Domain.Services.customer
 
         private static object[] BuildQueryArgs(IEnumerable<FieldFilter> listFilters)
         {
-            string conditionQuery = FieldFilterHelper.BuildQuery(addWhereClause:true,listFilters);
+            string conditionQuery = FieldFilterHelper.BuildQuery(addWhereClause: true, listFilters);
             return [conditionQuery];
         }
     }

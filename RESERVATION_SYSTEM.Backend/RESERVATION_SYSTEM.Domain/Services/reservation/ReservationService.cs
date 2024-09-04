@@ -1,6 +1,5 @@
 ﻿using RESERVATION_SYSTEM.Domain.DTOs;
 using RESERVATION_SYSTEM.Domain.Entities.reservation;
-using RESERVATION_SYSTEM.Domain.Entities.service;
 using RESERVATION_SYSTEM.Domain.Enums;
 using RESERVATION_SYSTEM.Domain.Helpers;
 using RESERVATION_SYSTEM.Domain.Ports;
@@ -108,14 +107,19 @@ namespace RESERVATION_SYSTEM.Domain.Services.reservation
 
             reservation = await repository.UpdateAsync(reservation);
 
-            await historyReservationService.CreateHistoryReservationAsync(reservation.Id, ReservationStatus.Canceled);
+            await historyReservationService
+                .CreateHistoryReservationAsync(
+                    reservation.Id,
+                    ReservationStatus.Canceled
+                );
+
             await serviceService.UpdateServiceNotAvailableAsync(reservation.ServiceID, true);
         }
 
         public async Task LiberateServicesAsync(Guid idCustomer)
         {
             IEnumerable<Reservation> listReservation = await repository.GetAsync(
-                reservation => reservation.CustomerID == idCustomer && 
+                reservation => reservation.CustomerID == idCustomer &&
                 reservation.State != ReservationStatus.Canceled.ToString() &&
                 reservation.ServiceID != null
             );
@@ -125,6 +129,7 @@ namespace RESERVATION_SYSTEM.Domain.Services.reservation
                 await serviceService.UpdateServiceNotAvailableAsync(reservation.ServiceID, true);
             }
         }
+
         private async Task<Reservation> ObtainReservationById(Guid id)
         {
             Reservation reservation = await repository.GetByIdAsync(id);

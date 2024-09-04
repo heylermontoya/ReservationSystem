@@ -19,6 +19,5 @@ namespace RESERVATION_SYSTEM.Domain.Entities.reservation
         public virtual Service? Service { get; set; } = default!;
         public virtual Customer Customer { get; set; } = default!;
         public virtual IEnumerable<HistoryReservation> HistoryReservation { get; set; } = default!;
-
     }
 }

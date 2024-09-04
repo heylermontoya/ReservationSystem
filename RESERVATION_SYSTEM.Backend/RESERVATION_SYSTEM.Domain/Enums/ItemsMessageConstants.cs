@@ -3,9 +3,9 @@
 namespace RESERVATION_SYSTEM.Domain.Enums
 {
     public enum ItemsMessageConstants
-    {        
+    {
         [Description("GetCustomers")]
-        GetCustomers,       
+        GetCustomers,
         [Description("GetServices")]
         GetServices,
         [Description("GetReservation")]

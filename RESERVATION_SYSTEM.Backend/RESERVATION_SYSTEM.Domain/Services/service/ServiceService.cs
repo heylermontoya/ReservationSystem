@@ -5,7 +5,6 @@ using RESERVATION_SYSTEM.Domain.Exceptions;
 using RESERVATION_SYSTEM.Domain.Helpers;
 using RESERVATION_SYSTEM.Domain.Ports;
 using RESERVATION_SYSTEM.Domain.QueryFilters;
-using RESERVATION_SYSTEM.Domain.Exceptions;
 
 namespace RESERVATION_SYSTEM.Domain.Services.service
 {
@@ -41,7 +40,6 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
             return servicess.ToList();
         }
 
-
         public async Task CreateServiceAsync(
             string name,
             string description,
@@ -62,11 +60,10 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
                 service => service.Name == name
             );
 
-            if(listService.Count() > 0)
+            if (listService.Any())
             {
                 throw new AppException(MessagesExceptions.NameServiceNotValid);
-            }            
-
+            }
 
             await repository.AddAsync(service);
         }
@@ -85,27 +82,24 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
                 service => service.Name == name
             );
 
-            if (listService.Count() > 0 && name != service.Name)
+            if (listService.Any() && name != service.Name)
             {
                 throw new AppException(MessagesExceptions.NameServiceNotValid);
             }
-
 
             service.Name = name;
             service.Description = description;
             service.Price = price;
             service.Capacity = capacity;
 
-            
-
             await repository.UpdateAsync(service);
         }
-        
+
         public async Task UpdateServiceNotAvailableAsync(Guid? id, bool available)
         {
             Service service = await ObtainServiceById(id);
 
-            service.Available = available;          
+            service.Available = available;
 
             await repository.UpdateAsync(service);
         }
@@ -114,13 +108,12 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
         {
             Service service = await ObtainServiceById(id);
 
-            //Se elimina deja en null todas las reservas asociadas a este servicio y el historial se deja intacto
             await repository.DeleteAsync(service);
         }
 
         private async Task<Service> ObtainServiceById(Guid? id)
         {
-            Service service = await repository.GetByIdAsync(id);
+            Service service = await repository.GetByIdAsync(id!);
             return service;
         }
 

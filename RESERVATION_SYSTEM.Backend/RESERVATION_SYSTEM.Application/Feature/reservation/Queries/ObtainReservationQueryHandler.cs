@@ -14,9 +14,10 @@ namespace RESERVATION_SYSTEM.Application.Feature.reservation.Queries
             this.service = service;
         }
 
-        public async Task<List<ReservationDto>> Handle(ObtainReservationQuery query, CancellationToken cancellationToken)
+        public async Task<List<ReservationDto>>
+            Handle(ObtainReservationQuery query, CancellationToken cancellationToken)
         {
-            List<ReservationDto> customer = await service.ObtainReservationAsync(query.filters);
+            List<ReservationDto> customer = await service.ObtainReservationAsync(query.Filters);
             return customer;
         }
     }
