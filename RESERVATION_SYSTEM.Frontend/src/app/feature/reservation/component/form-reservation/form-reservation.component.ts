@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { RegularExpressions } from '../../../../shared/constant/regex';
 import { CreateOrUpdateReservation } from '../../../../shared/interfaces/createOrUpdateReservation.interface';
-import { Service } from '../../../../shared/interfaces/Service.interface';
+import { Service } from '../../../../shared/interfaces/service.interface';
 import { User } from '../../../../shared/interfaces/user.interface';
 import { CustomerService } from '../../../../shared/services/customer/customer.service';
 import { ReservationService } from '../../../../shared/services/reservation/reservation.service';
@@ -113,8 +113,7 @@ export class FormReservationComponent {
           this.services = this.services.filter(
             service => service.available 
           )  
-        }
-           
+        }           
       }
     });
   }
@@ -135,7 +134,6 @@ export class FormReservationComponent {
           }
         });
       }
-
     }
   }
 

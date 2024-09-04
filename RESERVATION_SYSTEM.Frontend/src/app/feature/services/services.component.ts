@@ -4,7 +4,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FieldFilter } from '../../shared/interfaces/FieldFilter.interface';
 import { ServicesService } from '../../shared/services/Service/services.service';
-import { Service } from '../../shared/interfaces/Service.interface';
+import { Service } from '../../shared/interfaces/service.interface';
 import { FormServiceComponent } from './component/form-service/form-service.component';
 
 @Component({
@@ -53,8 +53,7 @@ export class ServicesComponent {
 
     this.ref.onClose.subscribe(() => {      
         this.getService();      
-    });
-    
+    });    
   }
 
   editService(id:string,name:string,description:string,price:string,capacity:string){
@@ -79,8 +78,8 @@ export class ServicesComponent {
 
   deleteService(id: string){
     this.confirmationService.confirm({
-      message: '¿Estás seguro de que deseas eliminar este registro?',
-      header: 'Confirmar Eliminación',
+      message: 'Are you sure you want to delete this record?',
+      header: 'Confirm Deletion',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.serviceService.deleteService(id).subscribe({
@@ -90,7 +89,7 @@ export class ServicesComponent {
         })
       },
       reject: () => {
-        console.log('Eliminación cancelada');
+        console.log('Deletion canceled');
       }
     });
   }
@@ -110,7 +109,6 @@ export class ServicesComponent {
       field: field,
       value : value
     }
-
 
     const indiceExist = this.filters.findIndex(item => item.field === data.field);
 

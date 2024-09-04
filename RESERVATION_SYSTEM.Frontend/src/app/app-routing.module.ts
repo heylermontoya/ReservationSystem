@@ -1,43 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './core/component/login/login.component';
-import { AuthGuard } from './core/guards/auth.guard';
 
-const routes: Routes = [
-    //{path:'',component:LoginComponent},
-    {
-        path:'home',
-        loadChildren: () => import('./feature/home/home.module')
-        .then(m => m.HomeModule),
-        //canActivate: [AuthGuard]
-    },
+const routes: Routes = [    
     {
         path:'reservation',
         loadChildren: () => import('./feature/reservation/reservation.module')
-        .then(m => m.ReservationModule),
-        //canActivate: [AuthGuard]
+        .then(m => m.ReservationModule)
     },
     {
         path:'history',
         loadChildren: () => import('./feature/history-reservation/history-reservation.module')
-        .then(m => m.HistoryReservationModule),
-        //canActivate: [AuthGuard]
+        .then(m => m.HistoryReservationModule)
     },
     {
         path:'users',
         loadChildren: () => import('./feature/users/users.module')
-        .then(m => m.UsersModule),
-        //canActivate: [AuthGuard]
+        .then(m => m.UsersModule)
     },
     {
         path:'services',
         loadChildren: () => import('./feature/services/services.module')
-        .then(m => m.ServicesModule),
-        //canActivate: [AuthGuard]
+        .then(m => m.ServicesModule)
     },
-    { path: 'login', component: LoginComponent }, // Ruta pública
+    { path: 'login', component: LoginComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: '**', redirectTo: '/login' } // Ruta por defecto
+    { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

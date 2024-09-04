@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { cancelReservation } from '../../interfaces/cancelReservation.interface';
+import { CancelReservation } from '../../interfaces/cancelReservation.interface';
 import { CreateOrUpdateReservation } from '../../interfaces/createOrUpdateReservation.interface';
 import { FieldFilter } from '../../interfaces/FieldFilter.interface';
-import { Options } from '../../interfaces/options.interface';
 import { Reservation } from '../../interfaces/reservation.interface';
 import { HttpService } from '../http-service/http.service';
 
@@ -37,10 +36,10 @@ export class ReservationService {
   }
   
   public deleteReservation(id: string): Observable<unknown> {
-    const opts : cancelReservation = {
+    const opts : CancelReservation = {
       Id:id
     }
-    return this.httpService.doPut<cancelReservation,unknown>(
+    return this.httpService.doPut<CancelReservation,unknown>(
       `${environment.endpoint_api_reservation}/cancel`,
       opts
     );

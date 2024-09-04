@@ -4,8 +4,8 @@ import { HistoryReservationComponent } from "./history-reservation.component";
 
 const routes: Routes = [    
     {
-        path: '',
-        component: HistoryReservationComponent
+      path: '',
+      component: HistoryReservationComponent
     }
 ];
 

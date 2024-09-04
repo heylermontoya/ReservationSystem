@@ -1,203 +1,192 @@
 <p-table
-#dt1
-[value]="reservations"
-dataKey="id"
-[rows]="5"
-[rowsPerPageOptions]="[5, 10, 15]"
-[loading]="loading"
-[paginator]="true"
-class="fixed-height-table"
-
+    #dt1
+    [value]="reservations"
+    dataKey="id"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    [loading]="loading"
+    [paginator]="true"
+    class="fixed-height-table"
 >
-<ng-template pTemplate="caption">
-    <div class="flex w-full p-1 ">
-        <br><br>     
-        <p-button label="New Reservation"  severity="success" (click)="newReservation()"/>
-    </div>
-</ng-template>
-<ng-template pTemplate="header">
-    <tr>
-        <th class="th-min-width" pSortableColumn="customerName" id="customerNameTh">
-            <div class="flex align-items-center">
-                Customer Name
-                <p-sortIcon field="customerName"></p-sortIcon>
-            </div>           
-        </th>
-        <th class="th-min-width" pSortableColumn="serviceName" id="serviceNameTh">
-            <div class="flex align-items-center">
-                Service Name
-                <p-sortIcon field="serviceName"></p-sortIcon>
-            </div>
-        </th>
-        <th class="th-min-width" pSortableColumn="dateReservation" id="dateReservationTh">
-            <div class="flex align-items-center">
-                Date Reservation
-                <p-sortIcon field="dateReservation"></p-sortIcon>
-            </div>
-        </th>
-        <th class="th-min-width" pSortableColumn="startDate" id="startDateTh">
-            <div class="flex align-items-center">
-                Start Date
-                <p-sortIcon field="startDate"></p-sortIcon>
-            </div>
-        </th>        
-        <th class="th-min-width" pSortableColumn="endDate" id="endDateTh">
-            <div class="flex align-items-center">
-                End Date
-                <p-sortIcon field="endDate"></p-sortIcon>
-            </div>
-        </th>        
-        <th class="th-min-width" pSortableColumn="state" id="stateTh">
-            <div class="flex align-items-center">
-                State
-                <p-sortIcon field="state"></p-sortIcon>
-            </div>
-        </th>        
-        <th class="th-min-width" pSortableColumn="numberPeople" id="numberPeopleTh">
-            <div class="flex align-items-center">
-                Number People
-                <p-sortIcon field="numberPeople"></p-sortIcon>
-            </div>
-        </th>        
-        <th class="th-min-width" pSortableColumn="total" id="totalTh">
-            <div class="flex align-items-center">
-                Total
-                <p-sortIcon field="total"></p-sortIcon>
-            </div>
-        </th>        
-        <th class="th-min-width" id="editTh">
-            <div class="flex align-items-center">
-                
-            </div>
-        </th>                
-        <th class="th-min-width" id="deleteTh">
-            <div class="flex align-items-center">
-                
-            </div>
-        </th>                
-    </tr>
-    <tr>
-        <th class="th-min-width" id="filterCustomerNameTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-search"></i>
-                <input type="text" (input)="onColumnFilter($event, 'customerName')" placeholder="Customer" />
-            </span>
-        </th>
-        <th class="th-min-width" id="filterServiceNameTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-search"></i>
-                <input type="text" (input)="onColumnFilter($event, 'serviceName')" placeholder="Service" />
-            </span>
-        </th>
-        <th class="th-min-width" id="filterDateReservationTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-calendar"></i>
-                <p-calendar 
-                    [showIcon]="true" 
-                    (onSelect)="onDateFilter($event, 'dateReservation')" 
-                    dateFormat="mm/dd/yy" 
-                    placeholder="Reservation"
-                    class="small-calendar"
-                >
-                </p-calendar>
-            </span>
-        </th>
-        <th class="th-min-width" id="filterStartDateTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-calendar"></i>
-                <p-calendar 
-                    [showIcon]="true" 
-                    (onSelect)="onDateFilter($event, 'startDate')" 
-                    dateFormat="mm/dd/yy" 
-                    placeholder="Start Date"
-                    class="small-calendar"
-                >
-                </p-calendar>
-            </span>
-        </th>
-        <th class="th-min-width" id="filterEndDateTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-calendar"></i>
-                <p-calendar 
-                    [showIcon]="true" 
-                    (onSelect)="onDateFilter($event, 'endDate')" 
-                    dateFormat="mm/dd/yy" 
-                    placeholder="End Date"
-                    class="small-calendar"
-                >
-                </p-calendar>
-            </span>
-        </th>
-        <th class="th-min-width" id="filterStateTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-search"></i>
-                <input type="text" (input)="onColumnFilter($event, 'state')" placeholder="State" />
-            </span>
-        </th>
-        <th class="th-min-width" id="filterNumberPeopleTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-search"></i>
-                <input type="text" (input)="onColumnFilter($event, 'numberPeople')" placeholder="# People" />
-            </span>
-        </th>
-        <th class="th-min-width" id="filterTotalTh">
-            <span class="p-input-icon-right">
-                <i class="pi pi-search"></i>
-                <input type="text" (input)="onColumnFilter($event, 'total')" placeholder="Total" />
-            </span>
-        </th>
-    </tr>
-</ng-template>
-<ng-template pTemplate="body" let-reservation>
-    <tr>
-        <td>
-            {{ reservation.customerName }}
-        </td>
-        <td>
-            {{ reservation.serviceName }}
-        </td>
-        <td>
-            {{ reservation.dateReservation | date:'MM/dd/yyyy' }}
-        </td>
-        <td>
-            {{ reservation.startDate | date:'MM/dd/yyyy'  }}
-        </td>        
-        <td>
-            {{ reservation.endDate | date:'MM/dd/yyyy'  }}
-        </td>        
-        <td>
-            {{ reservation.state }}
-        </td>        
-        <td>
-            {{ reservation.numberPeople }}
-        </td>        
-        <td>
-            {{ reservation.total }}
-        </td>        
-        <td>
-            <p-button label="Edit" [text]="true" severity="warning" 
-                (click)="editReservation(
-                    reservation.id,
-                    reservation.customerId,
-                    reservation.serviceID,
-                    reservation.dateReservation,
-                    reservation.startDate,
-                    reservation.endDate,
-                    reservation.state,
-                    reservation.numberPeople,
-                    reservation.total
-                )"
-            />
-        </td>
-        <td>
-            <p-button label="Delete" [text]="true" severity="danger" (click)="deleteReservation(reservation.id)" />
-        </td>
-    </tr>
-</ng-template>
-<ng-template pTemplate="emptymessage">
-    <tr>
-        <td colspan="7">No reservations found.</td>
-    </tr>
-</ng-template>
+    <ng-template pTemplate="caption">
+        <div class="flex w-full p-1 ">
+            <br><br>     
+            <p-button label="New Reservation"  severity="success" (click)="newReservation()"/>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th class="th-min-width" pSortableColumn="customerName" id="customerNameTh">
+                <div class="flex align-items-center">
+                    Customer Name
+                    <p-sortIcon field="customerName"></p-sortIcon>
+                </div>           
+            </th>
+            <th class="th-min-width" pSortableColumn="serviceName" id="serviceNameTh">
+                <div class="flex align-items-center">
+                    Service Name
+                    <p-sortIcon field="serviceName"></p-sortIcon>
+                </div>
+            </th>
+            <th class="th-min-width" pSortableColumn="dateReservation" id="dateReservationTh">
+                <div class="flex align-items-center">
+                    Date Reservation
+                    <p-sortIcon field="dateReservation"></p-sortIcon>
+                </div>
+            </th>
+            <th class="th-min-width" pSortableColumn="startDate" id="startDateTh">
+                <div class="flex align-items-center">
+                    Start Date
+                    <p-sortIcon field="startDate"></p-sortIcon>
+                </div>
+            </th>        
+            <th class="th-min-width" pSortableColumn="endDate" id="endDateTh">
+                <div class="flex align-items-center">
+                    End Date
+                    <p-sortIcon field="endDate"></p-sortIcon>
+                </div>
+            </th>        
+            <th class="th-min-width" pSortableColumn="state" id="stateTh">
+                <div class="flex align-items-center">
+                    State
+                    <p-sortIcon field="state"></p-sortIcon>
+                </div>
+            </th>        
+            <th class="th-min-width" pSortableColumn="numberPeople" id="numberPeopleTh">
+                <div class="flex align-items-center">
+                    Number People
+                    <p-sortIcon field="numberPeople"></p-sortIcon>
+                </div>
+            </th>        
+            <th class="th-min-width" pSortableColumn="total" id="totalTh">
+                <div class="flex align-items-center">
+                    Total
+                    <p-sortIcon field="total"></p-sortIcon>
+                </div>
+            </th>        
+            <th class="th-min-width" id="editTh">
+                <div class="flex align-items-center">                
+                </div>
+            </th>                
+            <th class="th-min-width" id="deleteTh">
+                <div class="flex align-items-center">                
+                </div>
+            </th>                
+        </tr>
+        <tr>
+            <th class="th-min-width" id="filterCustomerNameTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-search"></i>
+                    <input type="text" (input)="onColumnFilter($event, 'customerName')" placeholder="Customer" />
+                </span>
+            </th>
+            <th class="th-min-width" id="filterServiceNameTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-search"></i>
+                    <input type="text" (input)="onColumnFilter($event, 'serviceName')" placeholder="Service" />
+                </span>
+            </th>
+            <th class="th-min-width" id="filterDateReservationTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-calendar"></i>
+                    <p-calendar 
+                        [showIcon]="true" 
+                        (onSelect)="onDateFilter($event, 'dateReservation')" 
+                        dateFormat="mm/dd/yy" 
+                        placeholder="Reservation"
+                        class="small-calendar"
+                    >
+                    </p-calendar>
+                </span>
+            </th>
+            <th class="th-min-width" id="filterStartDateTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-calendar"></i>
+                    <p-calendar 
+                        [showIcon]="true" 
+                        (onSelect)="onDateFilter($event, 'startDate')" 
+                        dateFormat="mm/dd/yy" 
+                        placeholder="Start Date"
+                        class="small-calendar"
+                    >
+                    </p-calendar>
+                </span>
+            </th>
+            <th class="th-min-width" id="filterEndDateTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-calendar"></i>
+                    <p-calendar 
+                        [showIcon]="true" 
+                        (onSelect)="onDateFilter($event, 'endDate')" 
+                        dateFormat="mm/dd/yy" 
+                        placeholder="End Date"
+                        class="small-calendar"
+                    >
+                    </p-calendar>
+                </span>
+            </th>
+            <th class="th-min-width" id="filterStateTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-search"></i>
+                    <input type="text" (input)="onColumnFilter($event, 'state')" placeholder="State" />
+                </span>
+            </th>
+            <th class="th-min-width" id="filterNumberPeopleTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-search"></i>
+                    <input type="text" (input)="onColumnFilter($event, 'numberPeople')" placeholder="# People" />
+                </span>
+            </th>
+            <th class="th-min-width" id="filterTotalTh">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-search"></i>
+                    <input type="text" (input)="onColumnFilter($event, 'total')" placeholder="Total" />
+                </span>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-reservation>
+        <tr>
+            <td>
+                {{ reservation.customerName }}
+            </td>
+            <td>
+                {{ reservation.serviceName }}
+            </td>
+            <td>
+                {{ reservation.dateReservation | date:'MM/dd/yyyy' }}
+            </td>
+            <td>
+                {{ reservation.startDate | date:'MM/dd/yyyy'  }}
+            </td>        
+            <td>
+                {{ reservation.endDate | date:'MM/dd/yyyy'  }}
+            </td>        
+            <td>
+                {{ reservation.state }}
+            </td>        
+            <td>
+                {{ reservation.numberPeople }}
+            </td>        
+            <td>
+                {{ reservation.total }}
+            </td>        
+            <td>
+                <p-button label="Edit" [text]="true" severity="warning" 
+                    (click)="editReservation(
+                        reservation
+                    )"
+                />
+            </td>
+            <td>
+                <p-button label="Delete" [text]="true" severity="danger" (click)="deleteReservation(reservation.id)" />
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">No reservations found.</td>
+        </tr>
+    </ng-template>
 </p-table>
 <p-confirmDialog></p-confirmDialog>

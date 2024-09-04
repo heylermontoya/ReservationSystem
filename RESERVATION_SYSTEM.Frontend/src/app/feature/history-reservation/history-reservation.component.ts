@@ -43,7 +43,6 @@ export class HistoryReservationComponent {
       value : value
     }
 
-    //
     const indiceExist = this.filters.findIndex(item => item.field === data.field);
 
     if(indiceExist !== -1) {
@@ -54,7 +53,6 @@ export class HistoryReservationComponent {
       this.filters.push(data);
     }
 
-    //
     this.getHistoryReservation(); 
   }
 

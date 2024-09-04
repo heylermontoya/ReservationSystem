@@ -15,14 +15,12 @@ import { DialogService } from "primeng/dynamicdialog";
         FormsModule,
         CommonModule,   
         ServicesRoutingModule,
-        SharedModule,
-          
+        SharedModule,          
         CoreModule,
-        ReactiveFormsModule,      
-          
+        ReactiveFormsModule,                
     ],
     providers: [
         DialogService
-    ],
+    ]
 })
 export class ServicesModule {}

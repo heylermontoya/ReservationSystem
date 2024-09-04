@@ -34,7 +34,6 @@
     box-shadow: var(--shadown-normal);
     z-index: 1000;
     min-width: 150px;
-    //border-radius: var(--b.radius-normal);
     overflow: hidden;
 }
 
@@ -54,9 +53,6 @@
 .dropdown-item:hover{
     background-color: var(--primary-800);
 }
-
-
-//@at-root
 
 .user-avatar {
     display: flex;

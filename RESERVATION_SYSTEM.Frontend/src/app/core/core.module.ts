@@ -1,11 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-//import { AuthService } from "./services/auth.service";
-//import { HeaderComponent } from "./components/header/header.component";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from "../../environments/environment";
-import { AuthService } from "./services/auth.service";
 import { LoginComponent } from "./component/login/login.component";
 import { FormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
@@ -35,8 +32,6 @@ import { SidebarModule } from 'primeng/sidebar';
         AvatarModule,
         SidebarModule        
     ],
-    providers: [
-        //AuthService
-    ]
+    providers: []
 })
 export class CoreModule { }
