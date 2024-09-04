@@ -18,13 +18,13 @@ namespace RESERVATION_SYSTEM.Api.Controllers.customer
             this.mediator = mediator;
         }
 
-        [HttpGet()]
+        [HttpPost("list")]
         public async Task<List<CustomerDto>> ObtainCustomerAsync(
-            [FromQuery] Filter filters
+            IEnumerable<FieldFilter>? fieldFilter
         )
         {
             return await mediator.Send(
-                new ObtainCustomerQuery(filters)
+                new ObtainCustomerQuery(fieldFilter)
             );
         }
 

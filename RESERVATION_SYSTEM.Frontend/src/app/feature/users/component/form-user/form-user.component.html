@@ -1,0 +1,63 @@
+<div class="flex justify-between items-center w-full custom-background">
+    <p class="custom-background">{{ customerName }}  {{action}} User</p>
+</div>
+
+<form [formGroup]="userForm">
+  <div class="p-fluid">
+    
+    <div class="p-field">
+      <input inputId="name" type="text" pInputText formControlName="name" placeholder="Name*" />
+      <div *ngIf="userForm.get('name')?.invalid &&
+      (userForm.get('name')?.dirty || userForm.get('name')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="userForm.get('name')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+      </div>
+    </div>
+
+    <!---->
+
+    <div class="p-field-container">
+      <div class="p-field">
+        <input id="email" pInputText formControlName="email" placeholder="Email*" />
+        <div *ngIf="userForm.get('email')?.invalid &&
+          (userForm.get('email')?.dirty || userForm.get('email')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="userForm.get('email')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>
+
+      <div class="p-field">
+        <input id="phone" pInputText formControlName="phone" placeholder="Phone*" />
+        <div *ngIf="userForm.get('phone')?.invalid &&
+          (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="userForm.get('phone')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>      
+    </div>
+
+    <!---->
+
+    <div class="p-field-container-button">
+      <div class="p-field p-field-buttons">
+        <p-button 
+          label="SAVE" 
+          [text]="true" 
+          severity="success" 
+          class="ml-auto" 
+          type="submit"
+          [disabled]="!userForm.valid"
+          (click)="onSubmit()"
+        >
+        </p-button>
+        <p-button label="CLOSE" [text]="true" severity="success" (click)="onClose()" ></p-button>
+      </div>
+    </div>
+  </div>
+</form>

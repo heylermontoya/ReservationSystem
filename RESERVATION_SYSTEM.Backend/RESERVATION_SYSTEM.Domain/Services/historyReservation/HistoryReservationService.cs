@@ -1,7 +1,9 @@
-﻿using RESERVATION_SYSTEM.Domain.Entities.historyReservation;
+﻿using RESERVATION_SYSTEM.Domain.DTOs;
+using RESERVATION_SYSTEM.Domain.Entities.historyReservation;
 using RESERVATION_SYSTEM.Domain.Enums;
 using RESERVATION_SYSTEM.Domain.Helpers;
 using RESERVATION_SYSTEM.Domain.Ports;
+using RESERVATION_SYSTEM.Domain.QueryFilters;
 
 namespace RESERVATION_SYSTEM.Domain.Services.historyReservation
 {
@@ -20,6 +22,24 @@ namespace RESERVATION_SYSTEM.Domain.Services.historyReservation
             this.queryWrapper = queryWrapper;
         }
 
+        public async Task<List<HistoryReservationDto>> ObtainHistoryReservationDtoAsync(IEnumerable<FieldFilter>? filters)
+        {
+
+            List<FieldFilter> listFilters = filters != null ? filters.ToList() : [];
+
+            IEnumerable<HistoryReservationDto> historyReservations =
+                await queryWrapper
+                    .QueryAsync<HistoryReservationDto>(
+                        ItemsMessageConstants.GetHistoryReservation
+                            .GetDescription(),
+                        new
+                        { },
+                        BuildQueryArgs(listFilters)
+                    );
+
+            return historyReservations.ToList();
+        }
+
         public async Task CreateHistoryReservationAsync(
             Guid reservationID,
             ReservationStatus descriptionChange
@@ -34,5 +54,12 @@ namespace RESERVATION_SYSTEM.Domain.Services.historyReservation
 
             await repository.AddAsync(historyReservation);
         }
+
+        private static object[] BuildQueryArgs(IEnumerable<FieldFilter> listFilters)
+        {
+            string conditionQuery = FieldFilterHelper.BuildQuery(addWhereClause: true, listFilters);
+            return [conditionQuery];
+        }
+
     }
 }

@@ -4,5 +4,5 @@ using RESERVATION_SYSTEM.Domain.QueryFilters;
 
 namespace RESERVATION_SYSTEM.Application.Feature.customer.Queries
 {
-    public record ObtainCustomerQuery(Filter filters) : IRequest<List<CustomerDto>>;
+    public record ObtainCustomerQuery(IEnumerable<FieldFilter>? filters) : IRequest<List<CustomerDto>>;
 }
