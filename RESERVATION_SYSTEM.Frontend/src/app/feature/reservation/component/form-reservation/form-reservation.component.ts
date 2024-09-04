@@ -28,6 +28,7 @@ export class FormReservationComponent {
   id= '';
   possitiveNumber = 'Positive number greater than or equal to zero';
   possitiveNumberInt = 'Positive number integer greater than or equal to zero';
+  possitiveNumberIntGreatOne = 'Positive number integer greater than or equal to one';
 
   states = [
     { stateId: ReservationStatus.Confirmed, stateName: 'Confirmed' },
@@ -52,7 +53,7 @@ export class FormReservationComponent {
       dateReservation: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      numberPeople: [null,[Validators.required, Validators.min(0),Validators.pattern(RegularExpressions.NUMERIC)]],
+      numberPeople: [null,[Validators.required, Validators.min(1),Validators.pattern(RegularExpressions.NUMERIC)]],
       total: [null,[Validators.required, Validators.min(0),Validators.pattern(RegularExpressions.NUMERIC_PART)]]
     });
   }
