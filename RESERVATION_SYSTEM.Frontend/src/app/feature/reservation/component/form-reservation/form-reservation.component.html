@@ -1,0 +1,179 @@
+<div class="flex justify-between items-center w-full custom-background">
+    <p class="custom-background">{{ reservationName }}  {{action}} Reservation</p>
+</div>
+
+<form [formGroup]="reservationForm">
+  <div class="p-fluid">
+    
+    <div class="p-field-container">
+      <div class="p-field" *ngIf="action !== 'update'">
+        <p-dropdown 
+          id="type" 
+          [options]="customers" 
+          optionLabel="name" 
+          optionValue="id" 
+          formControlName="customer" 
+          placeholder="Customer*"
+        >
+        </p-dropdown>
+        <div *ngIf="reservationForm.get('customer')?.invalid &&
+          (reservationForm.get('customer')?.dirty || reservationForm.get('customer')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('customer')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>
+
+      <!---->
+
+      <div class="p-field">
+        <p-dropdown 
+          id="type" 
+          [options]="services" 
+          optionLabel="name" 
+          optionValue="id" 
+          formControlName="service" 
+          placeholder="Service*"
+        >
+        </p-dropdown>
+        <div *ngIf="reservationForm.get('service')?.invalid &&
+          (reservationForm.get('service')?.dirty || reservationForm.get('service')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('service')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>
+
+    </div>
+
+    <!---->
+
+    <div class="p-field-container">
+      <div class="p-field">
+        <p-calendar id="dateReservation" formControlName="dateReservation" [showTime]="true" placeholder="Date Reservation*"></p-calendar>
+        <div *ngIf="reservationForm.get('dateReservation')?.invalid &&
+          (reservationForm.get('dateReservation')?.dirty || reservationForm.get('dateReservation')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('dateReservation')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>
+
+      <div class="p-field">
+        <p-calendar id="startDate" formControlName="startDate" [showTime]="true" placeholder="Start Date*"></p-calendar>
+        <div *ngIf="reservationForm.get('startDate')?.invalid &&
+          (reservationForm.get('startDate')?.dirty || reservationForm.get('startDate')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('startDate')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>
+
+      <div class="p-field">
+        <p-calendar id="endDate" formControlName="endDate" [showTime]="true" placeholder="End Date*"></p-calendar>
+        <div *ngIf="reservationForm.get('endDate')?.invalid &&
+          (reservationForm.get('endDate')?.dirty || reservationForm.get('endDate')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('endDate')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>  
+    </div>    
+
+    <!---->
+
+    <div class="p-field-container">
+
+      
+
+      <div class="p-field">
+        <input 
+          id="numberPeople"
+          type="number"  
+          pInputText 
+          formControlName="numberPeople" 
+          placeholder="Number People*" 
+        />
+        <div *ngIf="reservationForm.get('numberPeople')?.invalid &&
+          (reservationForm.get('numberPeople')?.dirty || reservationForm.get('numberPeople')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('numberPeople')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>
+          <span class="error-message flex align-items-center"
+            *ngIf="reservationForm.get('numberPeople')?.hasError('min')"
+          >
+            <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+            <span>
+              {{ possitiveNumber }}
+            </span>
+            </span>        
+            <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('numberPeople')?.hasError('pattern')"
+            >
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+              <span>
+                {{ possitiveNumberInt }}
+              </span>
+            </span>           
+        </div>
+      </div>
+
+      <div class="p-field">
+        <input 
+          id="total" 
+          type="decimal" 
+          pInputText 
+          formControlName="total" 
+          placeholder="Total*" 
+        />
+        <div *ngIf="reservationForm.get('total')?.invalid &&
+          (reservationForm.get('total')?.dirty || reservationForm.get('total')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="reservationForm.get('total')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>   
+          <span class="error-message flex align-items-center"
+            *ngIf="reservationForm.get('total')?.hasError('min')"
+          >
+            <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+            <span>
+              {{ possitiveNumber }}
+            </span>
+          </span>        
+          <span class="error-message flex align-items-center"
+            *ngIf="reservationForm.get('total')?.hasError('pattern')"
+          >
+            <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+            <span>
+              {{ possitiveNumber }}
+            </span>
+          </span>        
+        </div>
+      </div>      
+    </div>
+
+    <!---->
+
+    <div class="p-field-container-button">
+      <div class="p-field p-field-buttons">
+        <p-button 
+          label="SAVE" 
+          [text]="true" 
+          severity="success" 
+          class="ml-auto" 
+          type="submit"
+          [disabled]="!reservationForm.valid"
+          (click)="onSubmit()"
+        >
+        </p-button>
+        <p-button label="CLOSE" [text]="true" severity="success" (click)="onClose()" ></p-button>
+      </div>
+    </div>
+  </div>
+</form>

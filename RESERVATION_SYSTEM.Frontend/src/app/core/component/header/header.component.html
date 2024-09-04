@@ -1,0 +1,61 @@
+<header>
+    <p-toolbar styleClass="custom-toolbar">
+        <div class="p-toolbar-group-left">
+            <button
+                pButton
+                type="button"
+                icon="pi pi-bars"
+                class="p-button-secondary"
+                (click)="toggleSidebar()"
+                title="Abrir Menú"
+            >                
+            </button>
+            <span class="separator"></span>
+            <span class="app-title">reservation system </span>
+        </div>
+        <div class="p-toolbar-group-right">
+            <div class="user-avatar">
+                <p-avatar
+                    icon="pi pi-user"
+                    shape="circle"
+                    title="{{userName | titlecase}}"
+                >                    
+                </p-avatar>
+                <span class="label-usuario">{{userName | titlecase}}</span>
+            </div>
+            
+            <span class="separator"></span>
+            <div class="separator-y"></div>
+
+            <button
+                pButton
+                type="button"
+                class="p-button-secondary"
+                icon="pi pi-angle-down"
+                iconPos="left"
+                (click)="toggleDropdown()"
+                title="Opciones"
+                tooltipPosition="bottom"
+            >
+            </button>
+            <div class="dropdown-menu" [class.show]="dropdownVisible">
+                <button 
+                    class="dropdown-item"
+                    (click)="logout()"
+                >
+                    Cerrar sesión
+                </button>
+            </div>
+        </div>
+    </p-toolbar>
+</header>
+
+<p-sidebar [(visible)]="sidebarVisible" [baseZIndex]="10000">
+    <h3>Menú de Navegación</h3>
+    <ul>
+        <li><a routerLink="/reservation">Reservation</a></li>        
+        <li><a routerLink="/history">History Reservation</a></li>
+        <li><a routerLink="/users">Users</a></li>
+        <li><a routerLink="/services">Services</a></li>
+    </ul>
+</p-sidebar>

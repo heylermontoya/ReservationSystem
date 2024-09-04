@@ -1,5 +1,11 @@
-﻿using RESERVATION_SYSTEM.Domain.Entities.service;
+﻿using RESERVATION_SYSTEM.Domain.DTOs;
+using RESERVATION_SYSTEM.Domain.Entities.service;
+using RESERVATION_SYSTEM.Domain.Enums;
+using RESERVATION_SYSTEM.Domain.Exceptions;
+using RESERVATION_SYSTEM.Domain.Helpers;
 using RESERVATION_SYSTEM.Domain.Ports;
+using RESERVATION_SYSTEM.Domain.QueryFilters;
+using RESERVATION_SYSTEM.Domain.Exceptions;
 
 namespace RESERVATION_SYSTEM.Domain.Services.service
 {
@@ -17,12 +23,30 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
             this.queryWrapper = queryWrapper;
         }
 
+        public async Task<List<ServiceDto>> ObtainServiceAsync(IEnumerable<FieldFilter>? filters)
+        {
+
+            List<FieldFilter> listFilters = filters != null ? filters.ToList() : [];
+
+            IEnumerable<ServiceDto> servicess =
+                await queryWrapper
+                    .QueryAsync<ServiceDto>(
+                        ItemsMessageConstants.GetServices
+                            .GetDescription(),
+                        new
+                        { },
+                        BuildQueryArgs(listFilters)
+                    );
+
+            return servicess.ToList();
+        }
+
+
         public async Task CreateServiceAsync(
             string name,
             string description,
             float price,
-            int capacity,
-            bool available
+            int capacity
         )
         {
             Service service = new()
@@ -31,8 +55,18 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
                 Description = description,
                 Price = price,
                 Capacity = capacity,
-                Available = available
+                Available = true
             };
+
+            IEnumerable<Service> listService = await repository.GetAsync(
+                service => service.Name == name
+            );
+
+            if(listService.Count() > 0)
+            {
+                throw new AppException(MessagesExceptions.NameServiceNotValid);
+            }            
+
 
             await repository.AddAsync(service);
         }
@@ -42,17 +76,36 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
             string name,
             string description,
             float price,
-            int capacity,
-            bool available
+            int capacity
         )
         {
             Service service = await ObtainServiceById(id);
+
+            IEnumerable<Service> listService = await repository.GetAsync(
+                service => service.Name == name
+            );
+
+            if (listService.Count() > 0 && name != service.Name)
+            {
+                throw new AppException(MessagesExceptions.NameServiceNotValid);
+            }
+
 
             service.Name = name;
             service.Description = description;
             service.Price = price;
             service.Capacity = capacity;
-            service.Available = available;
+
+            
+
+            await repository.UpdateAsync(service);
+        }
+        
+        public async Task UpdateServiceNotAvailableAsync(Guid? id, bool available)
+        {
+            Service service = await ObtainServiceById(id);
+
+            service.Available = available;          
 
             await repository.UpdateAsync(service);
         }
@@ -62,13 +115,19 @@ namespace RESERVATION_SYSTEM.Domain.Services.service
             Service service = await ObtainServiceById(id);
 
             //Se elimina deja en null todas las reservas asociadas a este servicio y el historial se deja intacto
-            await repository.DeleteAsync(service);            
+            await repository.DeleteAsync(service);
         }
-        
-        private async Task<Service> ObtainServiceById(Guid id)
+
+        private async Task<Service> ObtainServiceById(Guid? id)
         {
             Service service = await repository.GetByIdAsync(id);
             return service;
+        }
+
+        private static object[] BuildQueryArgs(IEnumerable<FieldFilter> listFilters)
+        {
+            string conditionQuery = FieldFilterHelper.BuildQuery(addWhereClause: true, listFilters);
+            return [conditionQuery];
         }
     }
 }

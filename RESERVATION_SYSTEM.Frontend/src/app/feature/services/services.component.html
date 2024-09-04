@@ -1,0 +1,125 @@
+<p-table
+#dt1
+[value]="services"
+dataKey="id"
+[rows]="5"
+[rowsPerPageOptions]="[5, 10, 15]"
+[loading]="loading"
+[paginator]="true"
+class="fixed-height-table"
+
+>
+<ng-template pTemplate="caption">
+    <div class="flex w-full p-1 ">
+        <br><br>     
+        <p-button label="New Service"  severity="success" (click)="newService()"/>
+    </div>
+</ng-template>
+<ng-template pTemplate="header">
+    <tr>
+        <th class="th-min-width" pSortableColumn="name" id="nameTh">
+            <div class="flex align-items-center">
+                Name
+                <p-sortIcon field="name"></p-sortIcon>
+            </div>           
+        </th>
+        <th class="th-min-width" pSortableColumn="description" id="descriptionTh">
+            <div class="flex align-items-center">
+                Description
+                <p-sortIcon field="description"></p-sortIcon>
+            </div>
+        </th>
+        <th class="th-min-width" pSortableColumn="price" id="priceTh">
+            <div class="flex align-items-center">
+                Price
+                <p-sortIcon field="price"></p-sortIcon>
+            </div>
+        </th>
+        <th class="th-min-width" pSortableColumn="capacity" id="capacityTh">
+            <div class="flex align-items-center">
+                Capacity
+                <p-sortIcon field="capacity"></p-sortIcon>
+            </div>
+        </th>        
+        <th class="th-min-width" pSortableColumn="available" id="availableTh">
+            <div class="flex align-items-center">
+                Available
+                <p-sortIcon field="available"></p-sortIcon>
+            </div>
+        </th>        
+        <th class="th-min-width" id="editTh">
+            <div class="flex align-items-center">
+                
+            </div>
+        </th>                
+        <th class="th-min-width" id="deleteTh">
+            <div class="flex align-items-center">
+                
+            </div>
+        </th>                
+    </tr>
+    <tr>
+        <th class="th-min-width" id="filterNameTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'name')" placeholder="Search Name" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterDescriptionTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'description')" placeholder="Search Description" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterPriceTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'price')" placeholder="Search Price" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterCapacityTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'capacity')" placeholder="Search Capacity" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterAvailableTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'available')" placeholder="Search Available" />
+            </span>
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-service>
+    <tr>
+        <td>
+            {{ service.name }}
+        </td>
+        <td>
+            {{ service.description }}
+        </td>
+        <td>
+            {{ service.price }}
+        </td>
+        <td>
+            {{ service.capacity }}
+        </td>        
+        <td>
+            {{ service.available }}
+        </td>        
+        <td>
+            <p-button label="Edit" [text]="true" severity="warning" (click)="editService(service.id,service.name,service.description,service.price,service.capacity)"/>
+        </td>
+        <td>
+            <p-button label="Delete" [text]="true" severity="danger" (click)="deleteService(service.id)" />
+        </td>
+    </tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+    <tr>
+        <td colspan="7">No services found.</td>
+    </tr>
+</ng-template>
+</p-table>
+<p-confirmDialog></p-confirmDialog>

@@ -22,8 +22,7 @@ namespace RESERVATION_SYSTEM.Application.Feature.service.Commands
                 command.Name,
                 command.Description,
                 command.Price,
-                command.Capacity,
-                command.Available
+                command.Capacity
             );
         }
     }

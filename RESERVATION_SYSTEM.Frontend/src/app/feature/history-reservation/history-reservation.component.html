@@ -1,0 +1,116 @@
+<p-table
+    #dt1
+    [value]="historyReservations"
+    dataKey="id"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    [loading]="loading"
+    [paginator]="true"
+    class="fixed-height-table"
+>
+<ng-template pTemplate="caption">
+    <div class="flex w-full p-1 ">
+        <br><br>     
+        <p>History Reservations</p>
+    </div>
+</ng-template>
+<ng-template pTemplate="header">
+    <tr>
+        <th class="th-min-width" pSortableColumn="reservationId" id="reservationIdTh">
+            <div class="flex align-items-center">
+                Reservation ID
+                <p-sortIcon field="reservationId"></p-sortIcon>
+            </div>           
+        </th>
+        <th class="th-min-width" pSortableColumn="dateChange" id="dateChangeTh">
+            <div class="flex align-items-center">
+                Date Change
+                <p-sortIcon field="dateChange"></p-sortIcon>
+            </div>
+        </th>
+        <th class="th-min-width" pSortableColumn="descriptionChange" id="descriptionChangeTh">
+            <div class="flex align-items-center">
+                Description Change
+                <p-sortIcon field="descriptionChange"></p-sortIcon>
+            </div>
+        </th>
+        <th class="th-min-width" pSortableColumn="serviceName" id="serviceNameTh">
+            <div class="flex align-items-center">
+                Service Name
+                <p-sortIcon field="serviceName"></p-sortIcon>
+            </div>
+        </th>        
+        <th class="th-min-width" pSortableColumn="customerName" id="customerNameTh">
+            <div class="flex align-items-center">
+                Customer Name
+                <p-sortIcon field="customerName"></p-sortIcon>
+            </div>
+        </th>                           
+    </tr>
+    <tr>
+        <th class="th-min-width" id="filterReservationIdTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'reservationId')" placeholder="Reservation Id" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterDateChangeTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-calendar"></i>
+                <p-calendar 
+                    [showIcon]="true" 
+                    (onSelect)="onDateFilter($event, 'dateChange')" 
+                    dateFormat="mm/dd/yy" 
+                    placeholder="Search Date"
+                    class="small-calendar"
+                >
+                </p-calendar>
+            </span>
+        </th>
+        <th class="th-min-width" id="filterDescriptionChangeTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'descriptionChange')" placeholder="Description Change" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterServiceNameTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'serviceName')" placeholder="Service Name" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterCustomerNameTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'customerName')" placeholder="Customer Name" />
+            </span>
+        </th>
+        
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-historyReservation>
+    <tr>
+        <td>
+            {{ historyReservation.reservationId }}
+        </td>
+        <td>
+            {{ historyReservation.dateChange | date:'MM/dd/yyyy' }}
+        </td>
+        <td>
+            {{ historyReservation.descriptionChange }}
+        </td>
+        <td>
+            {{ historyReservation.serviceName   }}
+        </td>                       
+        <td>
+            {{ historyReservation.customerName   }}
+        </td>                       
+    </tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+    <tr>
+        <td colspan="7">No history reservation found.</td>
+    </tr>
+</ng-template>
+</p-table>
+<p-confirmDialog></p-confirmDialog>

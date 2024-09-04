@@ -1,0 +1,117 @@
+<p-table
+#dt1
+[value]="users"
+dataKey="id"
+[rows]="5"
+[rowsPerPageOptions]="[5, 10, 15]"
+[loading]="loading"
+[paginator]="true"
+class="fixed-height-table"
+
+>
+<ng-template pTemplate="caption">
+    <div class="flex w-full p-1 ">
+        <br><br>     
+        <p-button label="New User"  severity="success" (click)="newUser()"/>
+    </div>
+</ng-template>
+<ng-template pTemplate="header">
+    <tr>
+        <th class="th-min-width" pSortableColumn="name" id="nameTh">
+            <div class="flex align-items-center">
+                Name
+                <p-sortIcon field="name"></p-sortIcon>
+            </div>           
+        </th>
+        <th class="th-min-width" pSortableColumn="email" id="emailTh">
+            <div class="flex align-items-center">
+                Email
+                <p-sortIcon field="email"></p-sortIcon>
+            </div>
+        </th>
+        <th class="th-min-width" pSortableColumn="phone" id="phoneTh">
+            <div class="flex align-items-center">
+                Phone
+                <p-sortIcon field="phone"></p-sortIcon>
+            </div>
+        </th>
+        <th class="th-min-width" pSortableColumn="dateRegistration" id="dateRegistrationTh">
+            <div class="flex align-items-center">
+                Date Registration
+                <p-sortIcon field="dateRegistration"></p-sortIcon>
+            </div>
+        </th>        
+        <th class="th-min-width" id="editTh">
+            <div class="flex align-items-center">
+                
+            </div>
+        </th>                
+        <th class="th-min-width" id="deleteTh">
+            <div class="flex align-items-center">
+                
+            </div>
+        </th>                
+    </tr>
+    <tr>
+        <th class="th-min-width" id="filterNameTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'name')" placeholder="Search Name" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterEmailTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'email')" placeholder="Search Email" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterPhoneTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" (input)="onColumnFilter($event, 'phone')" placeholder="Search Phone" />
+            </span>
+        </th>
+        <th class="th-min-width" id="filterdateRegistrationTh">
+            <span class="p-input-icon-right">
+                <i class="pi pi-calendar"></i>
+                <p-calendar 
+                    [showIcon]="true" 
+                    (onSelect)="onDateFilter($event, 'dateRegistration')" 
+                    dateFormat="mm/dd/yy" 
+                    placeholder="Search Date"
+                    class="small-calendar"
+                >
+                </p-calendar>
+            </span>
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-user>
+    <tr>
+        <td>
+            {{ user.name }}
+        </td>
+        <td>
+            {{ user.email }}
+        </td>
+        <td>
+            {{ user.phone }}
+        </td>
+        <td>
+            {{ user.dateRegistration | date:'MM/dd/yyyy'  }}
+        </td>        
+        <td>
+            <p-button label="Edit" [text]="true" severity="warning" (click)="editUser(user.id,user.name,user.phone,user.email)"/>
+        </td>
+        <td>
+            <p-button label="Delete" [text]="true" severity="danger" (click)="deleteUser(user.id)" />
+        </td>
+    </tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+    <tr>
+        <td colspan="7">No users found.</td>
+    </tr>
+</ng-template>
+</p-table>
+<p-confirmDialog></p-confirmDialog>

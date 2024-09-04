@@ -1,0 +1,10 @@
+.dashboard{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.sidebar{
+    padding: var(--space-4);
+    height: calc(100% - var(--space-4)*2);
+}

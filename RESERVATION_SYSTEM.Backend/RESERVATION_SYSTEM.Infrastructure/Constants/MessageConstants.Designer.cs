@@ -59,5 +59,85 @@ namespace RESERVATION_SYSTEM.Infrastructure.Constants {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SELECT [Id]
+        ///      ,[Name]
+        ///      ,[Email]
+        ///      ,[Phone]
+        ///      ,[DateRegistration]
+        ///  FROM [Reservation].[dbo].[Customer]
+        ///  {0}.
+        /// </summary>
+        internal static string GetCustomers {
+            get {
+                return ResourceManager.GetString("GetCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a select * from (
+        /// SELECT 
+        ///  h.[ReservationID]
+        ///  ,h.[DateChange]
+        ///  ,h.[DescriptionChange]
+        ///  ,s.[Name] as ServiceName
+        ///  ,c.[name] as CustomerName
+        /// FROM 
+        ///  [Reservation].[dbo].[HistoryReservation] as h
+        /// inner join Reservation.dbo.Reservation as r on r.Id = h.ReservationID
+        /// inner join Reservation.dbo.Customer as c on c.id = r.[CustomerID]
+        /// inner join Reservation.dbo.[Service] as s on s.id = r.ServiceID
+        ///) as s
+        ///{0}.
+        /// </summary>
+        internal static string GetHistoryReservation {
+            get {
+                return ResourceManager.GetString("GetHistoryReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a select * from (
+        /// SELECT 
+        ///  r.[Id]
+        ///    ,r.[CustomerID]
+        ///    ,c.[name] as CustomerName
+        ///    ,r.[ServiceID]
+        ///    ,s.[Name] as ServiceName
+        ///    ,r.[DateReservation]
+        ///    ,r.[StartDate]
+        ///    ,r.[EndDate]
+        ///    ,r.[State]
+        ///    ,r.[NumberPeople]
+        ///    ,r.[Total]
+        ///   FROM [Reservation].[dbo].[Reservation] as r
+        ///   inner join Reservation.dbo.Customer as c on c.id = r.[CustomerID]
+        ///   inner join Reservation.dbo.[Service] as s on s.id = r.ServiceID
+        ///  ) as s
+        ///  {0}.
+        /// </summary>
+        internal static string GetReservation {
+            get {
+                return ResourceManager.GetString("GetReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SELECT  [Id]
+        ///      ,[Name]
+        ///      ,[Description]
+        ///      ,[Price]
+        ///      ,[Capacity]
+        ///      ,[Available]
+        ///  FROM [Reservation].[dbo].[Service]
+        ///{0}
+        ///.
+        /// </summary>
+        internal static string GetServices {
+            get {
+                return ResourceManager.GetString("GetServices", resourceCulture);
+            }
+        }
     }
 }

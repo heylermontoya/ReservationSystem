@@ -1,0 +1,122 @@
+<div class="flex justify-between items-center w-full custom-background">
+    <p class="custom-background">{{ serviceName }}  {{action}} Service</p>
+</div>
+
+<form [formGroup]="serviceForm">
+  <div class="p-fluid">
+    
+    <div class="p-field">
+      <input inputId="name" type="text" pInputText formControlName="name" placeholder="Name*" />
+      <div *ngIf="serviceForm.get('name')?.invalid &&
+      (serviceForm.get('name')?.dirty || serviceForm.get('name')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="serviceForm.get('name')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+      </div>
+    </div>
+
+    <!---->
+
+    <div class="p-field-container">
+      <div class="p-field">
+        <input id="description" pInputText formControlName="description" placeholder="Description*" />
+        <div *ngIf="serviceForm.get('description')?.invalid &&
+          (serviceForm.get('description')?.dirty || serviceForm.get('description')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="serviceForm.get('description')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>          
+        </div>
+      </div>
+
+      <div class="p-field">
+        <input 
+          id="price" 
+          type="decimal" 
+          pInputText 
+          formControlName="price" 
+          placeholder="Price*" 
+        />
+        <div *ngIf="serviceForm.get('price')?.invalid &&
+          (serviceForm.get('price')?.dirty || serviceForm.get('price')?.touched)">
+          <span class="error-message flex align-items-center"
+              *ngIf="serviceForm.get('price')?.hasError('required')">
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+          </span>   
+          <span class="error-message flex align-items-center"
+            *ngIf="serviceForm.get('price')?.hasError('min')"
+          >
+            <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+            <span>
+              {{ possitiveNumber }}
+            </span>
+          </span>        
+          <span class="error-message flex align-items-center"
+            *ngIf="serviceForm.get('price')?.hasError('pattern')"
+          >
+            <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+            <span>
+              {{ possitiveNumber }}
+            </span>
+          </span>         
+        </div>
+      </div>      
+    </div>
+
+    <!---->
+
+    <div class="p-field-container">
+        <div class="p-field">
+          <input 
+            id="capacity" 
+            type="number" 
+            pInputText 
+            formControlName="capacity" 
+            placeholder="Capacity*" 
+          />
+          <div *ngIf="serviceForm.get('capacity')?.invalid &&
+            (serviceForm.get('capacity')?.dirty || serviceForm.get('capacity')?.touched)">
+            <span class="error-message flex align-items-center"
+                *ngIf="serviceForm.get('capacity')?.hasError('required')">
+                <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> <span>{{ requiredField }}</span>
+            </span>    
+            <span class="error-message flex align-items-center"
+            *ngIf="serviceForm.get('capacity')?.hasError('min')"
+          >
+            <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+            <span>
+              {{ possitiveNumber }}
+            </span>
+            </span>        
+            <span class="error-message flex align-items-center"
+              *ngIf="serviceForm.get('capacity')?.hasError('pattern')"
+            >
+              <img class="w-2rem pl-2" src="/assets/svg/required.svg" alt="error"> 
+              <span>
+                {{ possitiveNumberInt }}
+              </span>
+            </span>       
+          </div>
+        </div>        
+      </div>
+  
+      <!---->
+
+    <div class="p-field-container-button">
+      <div class="p-field p-field-buttons">
+        <p-button 
+          label="SAVE" 
+          [text]="true" 
+          severity="success" 
+          class="ml-auto" 
+          type="submit"
+          [disabled]="!serviceForm.valid"
+          (click)="onSubmit()"
+        >
+        </p-button>
+        <p-button label="CLOSE" [text]="true" severity="success" (click)="onClose()" ></p-button>
+      </div>
+    </div>
+  </div>
+</form>

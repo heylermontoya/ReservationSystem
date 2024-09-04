@@ -8,7 +8,6 @@ namespace RESERVATION_SYSTEM.Application.Feature.service.Commands
         [Required] string Name,
         [Required] string Description,
         [Required] float Price,
-        [Required] int Capacity,
-        [Required] bool Available
+        [Required] int Capacity
     ) : IRequest;
 }
