@@ -143,3 +143,11 @@ Para correr el **BackEnd** en **.NET 8**, sigue estos pasos:
 --- 
 
 Con lo anterior ya deberia de poder ver la aplicacion funcionando correctamente.
+
+Como datos adicionales, a continuacion se muestra un diagrama de la arquitectura usada para desarrollar la aplicacion y la documentacion de la api que se genera con swagger.
+
+![Diagrama Arquitectura](./ReservationSystem_ArchitectureDiagram.jpg)
+
+
+[Descargar socumentacion de la api con swagger](./DocumentationWithSwaggerWebApi/DocumentationWithSwagger.json)
+
