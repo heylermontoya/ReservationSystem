@@ -4,7 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { CreateOrUpdateService } from '../../interfaces/createOrUpdateService.interface';
 import { FieldFilter } from '../../interfaces/FieldFilter.interface';
 import { Options } from '../../interfaces/options.interface';
-import { Service } from '../../interfaces/Service.interface';
+import { Service } from '../../interfaces/service.interface';
 import { HttpService } from '../http-service/http.service';
 
 @Injectable({

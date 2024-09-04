@@ -22,7 +22,8 @@ namespace RESERVATION_SYSTEM.Domain.Services.historyReservation
             this.queryWrapper = queryWrapper;
         }
 
-        public async Task<List<HistoryReservationDto>> ObtainHistoryReservationDtoAsync(IEnumerable<FieldFilter>? filters)
+        public async Task<List<HistoryReservationDto>>
+            ObtainHistoryReservationDtoAsync(IEnumerable<FieldFilter>? filters)
         {
 
             List<FieldFilter> listFilters = filters != null ? filters.ToList() : [];
@@ -60,6 +61,5 @@ namespace RESERVATION_SYSTEM.Domain.Services.historyReservation
             string conditionQuery = FieldFilterHelper.BuildQuery(addWhereClause: true, listFilters);
             return [conditionQuery];
         }
-
     }
 }

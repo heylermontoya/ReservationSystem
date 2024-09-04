@@ -16,7 +16,7 @@ namespace RESERVATION_SYSTEM.Application.Feature.customer.Queries
 
         public async Task<List<CustomerDto>> Handle(ObtainCustomerQuery query, CancellationToken cancellationToken)
         {
-            List<CustomerDto> customer = await service.ObtainCustomerAsync(query.filters);
+            List<CustomerDto> customer = await service.ObtainCustomerAsync(query.Filters);
             return customer;
         }
     }

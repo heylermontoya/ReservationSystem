@@ -59,28 +59,20 @@ export class ReservationComponent {
   }
 
   editReservation(
-    id:string,
-    customerId:string,
-    serviceId:string,
-    dateReservation:string,
-    startDate:string,
-    endDate:string,
-    state:string,
-    numberPeople:string,
-    total:string
+    reservation: Reservation
   ){
     this.ref = this.dialogService.open(FormReservationComponent, {
       data: { 
         action:'update',
-        id: id,
-        customerId:customerId,
-        serviceId:serviceId,
-        dateReservation:dateReservation,
-        startDate:startDate,
-        endDate:endDate,
-        state:state,
-        numberPeople:numberPeople,
-        total:total
+        id: reservation.id,
+        customerId: reservation.customerId,
+        serviceId: reservation.ServiceId,
+        dateReservation:reservation.dateReservation,
+        startDate:reservation.startDate,
+        endDate:reservation.endDate,
+        state:reservation.state,
+        numberPeople:reservation.numberPeople,
+        total:reservation.total
       },
       width: '90%',
       height: '100%',
@@ -94,8 +86,8 @@ export class ReservationComponent {
 
   deleteReservation(id: string){
     this.confirmationService.confirm({
-      message: '¿Estás seguro de que deseas eliminar este registro?',
-      header: 'Confirmar Eliminación',
+      message: 'Are you sure you want to delete this record?',
+      header: 'Confirm Deletion',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.reservationService.deleteReservation(id).subscribe({
@@ -105,7 +97,7 @@ export class ReservationComponent {
         })
       },
       reject: () => {
-        console.log('Eliminación cancelada');
+        console.log('Deletion canceled');
       }
     });
   }
@@ -126,7 +118,6 @@ export class ReservationComponent {
       value : value
     }
 
-    //
     const indiceExist = this.filters.findIndex(item => item.field === data.field);
 
     if(indiceExist !== -1) {
@@ -137,7 +128,6 @@ export class ReservationComponent {
       this.filters.push(data);
     }
 
-    //
     this.getReservation(); 
   }
 

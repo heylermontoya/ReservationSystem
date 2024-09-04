@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RESERVATION_SYSTEM.Domain.Helpers;
 using RESERVATION_SYSTEM.Domain.Ports;
 using RESERVATION_SYSTEM.Infrastructure.Context;
 using System.Linq.Expressions;
-
 
 namespace RESERVATION_SYSTEM.Infrastructure.Adapters
 {
@@ -173,7 +171,7 @@ namespace RESERVATION_SYSTEM.Infrastructure.Adapters
 
         public async Task CommitAsync()
         {
-            _context.ChangeTracker.DetectChanges();            
+            _context.ChangeTracker.DetectChanges();
             await _context.CommitAsync().ConfigureAwait(false);
         }
 

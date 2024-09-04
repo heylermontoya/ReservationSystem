@@ -19,26 +19,24 @@ input[type="text"]:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-:host ::ng-deep .p-datatable-wrapper {
-    //min-height:500px;
-    //height: auto;
+:host ::ng-deep .p-datatable-wrapper {    
     height: 65vh;
     overflow-y: auto;
 }
 
 .small-calendar .p-inputtext {
-    font-size: 1px; /* Reduce el tamaño de la fuente */
-    padding: 0.1rem 0.1rem; /* Ajusta el relleno */
+    font-size: 1px; 
+    padding: 0.1rem 0.1rem; 
 }
 
 .small-calendar .p-datepicker {
-    font-size: 1px; /* Reduce el tamaño de la fuente en el calendario */
+    font-size: 1px; 
 }
 
 .small-calendar .p-datepicker .p-datepicker-header {
-    font-size: 1px; /* Reduce el tamaño de la fuente en la cabecera del calendario */
+    font-size: 1px; 
 }
 
 .small-calendar .p-datepicker .p-datepicker-calendar td {
-    padding: 0.1rem; /* Ajusta el espacio entre los días */
+    padding: 0.1rem; 
 }

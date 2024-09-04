@@ -4,7 +4,6 @@ using System.Text;
 
 namespace RESERVATION_SYSTEM.Domain.Helpers
 {
-
     public static class FieldFilterHelper
     {
         private const string COMMA_CHARACTER = ",";

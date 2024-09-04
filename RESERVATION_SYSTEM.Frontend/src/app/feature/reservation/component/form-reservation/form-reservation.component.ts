@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { RegularExpressions } from '../../../../shared/constant/regex';
 import { CreateOrUpdateReservation } from '../../../../shared/interfaces/createOrUpdateReservation.interface';
-import { Service } from '../../../../shared/interfaces/Service.interface';
+import { Service } from '../../../../shared/interfaces/service.interface';
 import { User } from '../../../../shared/interfaces/user.interface';
 import { CustomerService } from '../../../../shared/services/customer/customer.service';
 import { ReservationService } from '../../../../shared/services/reservation/reservation.service';
@@ -28,6 +28,7 @@ export class FormReservationComponent {
   id= '';
   possitiveNumber = 'Positive number greater than or equal to zero';
   possitiveNumberInt = 'Positive number integer greater than or equal to zero';
+  possitiveNumberIntGreatOne = 'Positive number integer greater than or equal to one';
 
   states = [
     { stateId: ReservationStatus.Confirmed, stateName: 'Confirmed' },
@@ -52,7 +53,7 @@ export class FormReservationComponent {
       dateReservation: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      numberPeople: [null,[Validators.required, Validators.min(0),Validators.pattern(RegularExpressions.NUMERIC)]],
+      numberPeople: [null,[Validators.required, Validators.min(1),Validators.pattern(RegularExpressions.NUMERIC)]],
       total: [null,[Validators.required, Validators.min(0),Validators.pattern(RegularExpressions.NUMERIC_PART)]]
     });
   }
@@ -113,8 +114,7 @@ export class FormReservationComponent {
           this.services = this.services.filter(
             service => service.available 
           )  
-        }
-           
+        }           
       }
     });
   }
@@ -135,7 +135,6 @@ export class FormReservationComponent {
           }
         });
       }
-
     }
   }
 

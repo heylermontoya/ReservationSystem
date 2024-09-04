@@ -20,9 +20,7 @@ import { UsersRoutingModule } from "./users-routing.module";
         ReactiveFormsModule,           
     ],
     providers: [
-        //CustomerService,
-        DialogService,
-        //AuthService
-    ],
+        DialogService
+    ]
 })
 export class UsersModule {}

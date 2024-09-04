@@ -3,10 +3,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CoreModule } from "../../core/core.module";
 import { SharedModule } from "../../shared/shared.module";
-import { DialogService } from "primeng/dynamicdialog";
 import { HistoryReservationComponent } from "./history-reservation.component";
 import { HistoryReservationRoutingModule } from "./history-reservation-routing.module";
-//import { AuthService } from "../../core/services/auth.service";
 
 @NgModule({
     declarations: [
@@ -16,16 +14,10 @@ import { HistoryReservationRoutingModule } from "./history-reservation-routing.m
         FormsModule,
         CommonModule,   
         HistoryReservationRoutingModule,
-        SharedModule,
-          
+        SharedModule,          
         CoreModule,
-        ReactiveFormsModule,      
-          
+        ReactiveFormsModule,                
     ],
-    providers: [
-        //CustomerService,
-        //DialogService,
-        //AuthService
-    ],
+    providers: []
 })
 export class HistoryReservationModule {}

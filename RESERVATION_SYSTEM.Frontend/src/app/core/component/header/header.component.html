@@ -1,4 +1,4 @@
-<header>
+<header *ngIf="isLogged">
     <p-toolbar styleClass="custom-toolbar">
         <div class="p-toolbar-group-left">
             <button
@@ -43,19 +43,21 @@
                     class="dropdown-item"
                     (click)="logout()"
                 >
-                    Cerrar sesión
+                    Sign out
                 </button>
             </div>
         </div>
     </p-toolbar>
 </header>
 
-<p-sidebar [(visible)]="sidebarVisible" [baseZIndex]="10000">
-    <h3>Menú de Navegación</h3>
-    <ul>
-        <li><a routerLink="/reservation">Reservation</a></li>        
-        <li><a routerLink="/history">History Reservation</a></li>
-        <li><a routerLink="/users">Users</a></li>
-        <li><a routerLink="/services">Services</a></li>
+<p-sidebar [(visible)]="sidebarVisible" [baseZIndex]="10000" *ngIf="isLogged" position="left">
+    <div class="sidebar-header">
+        <h3>Navigation Menu</h3>        
+    </div>
+    <ul class="sidebar-menu">
+        <li><a routerLink="/reservation" routerLinkActive="active">Reservation</a></li>
+        <li><a routerLink="/history" routerLinkActive="active">History Reservation</a></li>
+        <li><a routerLink="/users" routerLinkActive="active">Users</a></li>
+        <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
     </ul>
 </p-sidebar>

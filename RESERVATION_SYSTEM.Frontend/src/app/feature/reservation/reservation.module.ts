@@ -15,14 +15,12 @@ import { ReservationRoutingModule } from "./reservation-routing.module";
         FormsModule,
         CommonModule,   
         ReservationRoutingModule,
-        SharedModule,
-          
+        SharedModule,          
         CoreModule,
-        ReactiveFormsModule,      
-          
+        ReactiveFormsModule          
     ],
     providers: [
         DialogService
-    ],
+    ]
 })
 export class ReservationModule {}

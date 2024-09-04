@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { User } from '../../shared/interfaces/user.interface';
-import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CustomerService } from '../../shared/services/customer/customer.service';
 import { FormUserComponent } from './component/form-user/form-user.component';
@@ -22,7 +21,6 @@ export class UsersComponent {
 
   constructor(
     private customerService: CustomerService, 
-    private router : Router,
     public dialogService: DialogService,
     private confirmationService: ConfirmationService
   ) {}
@@ -31,7 +29,7 @@ export class UsersComponent {
     this.getUser();
   } 
 
-  getUser(searchTerm: string = ''){
+  getUser(){
     this.customerService.getUser(this.filters).subscribe({
       next: response => {
         this.users = response;
@@ -54,8 +52,7 @@ export class UsersComponent {
 
     this.ref.onClose.subscribe(() => {      
         this.getUser();      
-    });
-    
+    });    
   }
 
   editUser(id:string,name:string,phone:string,email:string){
@@ -79,8 +76,8 @@ export class UsersComponent {
 
   deleteUser(id: string){
     this.confirmationService.confirm({
-      message: '¿Estás seguro de que deseas eliminar este registro?',
-      header: 'Confirmar Eliminación',
+      message: 'Are you sure you want to delete this record?',
+      header: 'Confirm Deletion',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.customerService.deleteUser(id).subscribe({
@@ -90,18 +87,10 @@ export class UsersComponent {
         })
       },
       reject: () => {
-        console.log('Eliminación cancelada');
+        console.log('Deletion canceled');
       }
     });
-  }
-
-  search() {
-    if (this.searchValue.trim() === '') {
-      this.getUser();
-    } else {
-      this.getUser(this.searchValue);
-    }
-  }
+  }  
 
   onColumnFilter(event: any, field: string) {
     const value = event.target.value.trim();
@@ -111,7 +100,6 @@ export class UsersComponent {
       value : value
     }
 
-    //
     const indiceExist = this.filters.findIndex(item => item.field === data.field);
 
     if(indiceExist !== -1) {
@@ -122,7 +110,6 @@ export class UsersComponent {
       this.filters.push(data);
     }
 
-    //
     this.getUser(); 
   }
 

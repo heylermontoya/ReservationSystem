@@ -8,7 +8,6 @@ export const environment = {
     endpoint_api_reservation: `${YARP_CEIBA_XM}${api.reservation}`,
     endpoint_api_history_reservation: `${YARP_CEIBA_XM}${api.history_reservation}`,
 
-
     firebaseConfig: {
         apiKey: "AIzaSyD8HUYxexZO1dM7iKAZ-K1qUzHOxrcVZLg",
         authDomain: "loguin-3ae79.firebaseapp.com",

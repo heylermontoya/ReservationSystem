@@ -1,46 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, signInWithPopup, signOut, user } from '@angular/fire/auth';
+import firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  //user$: Observable<any>;
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
-  constructor(
-    //private auth:Auth,
-    private router: Router
-  ) {
-    //this.user$ = user(this.auth); // Observa el estado de autenticación
-   }
-
-  loginConGoogle() {
-    /*
-    return signInWithPopup(this.auth, new GoogleAuthProvider())
-      .then((result) => {debugger;
-        // Redirige al usuario después del login exitoso
-        this.router.navigate(['home']); // Cambia '/dashboard' por la ruta deseada
-      })
-      .catch((error) => {debugger;
-        // Manejo de errores
-        console.error('Error durante el login:', error);
-      });
-      */
-  }
-  
-  CerrarSesion() {
-    //return signOut(this.auth);
+  async signInWithGoogle(): Promise<void> {
+    try {
+      await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      this.router.navigate(['/reservation']);
+    } catch (error) {
+      console.error('Error during sign in with Google:', error);
+    }
   }
 
-  isLoggedIn(): Observable<boolean> | boolean {
-    /*
-    return this.user$.pipe(
-      map(user => !!user) // Devuelve true si el usuario está logado, false si no
+  async signOut(): Promise<void> {
+    try {
+      await this.afAuth.signOut();
+      this.router.navigate(['/login']); 
+    } catch (error) {
+      console.error('Error during sign out:', error);
+    }
+  }
+
+  isLoggedIn(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      map(user => !!user)
     );
-    */
-   return true;
+  }
+
+   getUserName(): Observable<string | null> {
+    return this.afAuth.authState.pipe(
+      map(user => user ? user.displayName : null)
+    );
+  }
+
+  getUserEmail(): Observable<string | null> {
+    return this.afAuth.authState.pipe(
+      map(user => user ? user.email : null)
+    );
   }
 }

@@ -1,3 +1,3 @@
-export interface cancelReservation{
+export interface CancelReservation{
     Id: string;
 }

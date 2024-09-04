@@ -1,4 +1,3 @@
-
 using MediatR;
 using RESERVATION_SYSTEM.Api.Filters;
 using RESERVATION_SYSTEM.Infrastructure.Extensions;
@@ -39,11 +38,12 @@ public partial class Program
             Assembly.Load("RESERVATION_SYSTEM.Application"),
             typeof(Program).Assembly
         );
+
         builder.Services.AddAutoMapper(
             Assembly.Load("RESERVATION_SYSTEM.Application")
         );
 
-        string stringConnection = config["StringConnection"];
+        string stringConnection = config["StringConnection"]!;
 
         builder.Services.AddDbContext<PersistenceContext>(opt =>
         {
@@ -55,7 +55,6 @@ public partial class Program
 
         builder.Services
             .AddHealthChecks();
-
 
         builder.Services
             .AddLogging(loggingBuilder => loggingBuilder.AddConsole()

@@ -1,43 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-//import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent {
 
   isLoggedIn: boolean = false;
   username: string = '';
   password: string = '';
 
+  constructor(private auth$: AuthService) {}
 
-  constructor(
-    private auth$: AuthService, 
-    private router: Router
-  ){}
-
-  ngOnInit() {
-    /*
-    this.auth$.isLoggedIn().subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn) {
-        this.router.navigate(['home']);
-      }
-    });
-    */
-  }
-
-  loginWithGoogle(){
-    this.auth$.loginConGoogle();
-  }
-
-  onSubmit() {
-    // Manejar el inicio de sesión con usuario y contraseña
-    console.log('Iniciar sesión con', this.username, this.password);
-  }
+  loginWithGoogle(): void {
+    this.auth$.signInWithGoogle();
+  }  
 }
