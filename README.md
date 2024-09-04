@@ -149,5 +149,5 @@ Como datos adicionales, a continuacion se muestra un diagrama de la arquitectura
 ![Diagrama Arquitectura](./ReservationSystem_ArchitectureDiagram.jpg)
 
 
-[Descargar socumentacion de la api con swagger](./DocumentationWithSwaggerWebApi/DocumentationWithSwagger.json)
+[ver documentación de la api con swagger](./DocumentationWithSwaggerWebApi/DocumentationWithSwagger.json)
 
