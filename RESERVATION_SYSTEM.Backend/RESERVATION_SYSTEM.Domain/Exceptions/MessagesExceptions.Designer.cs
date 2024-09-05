@@ -22,21 +22,21 @@ namespace RESERVATION_SYSTEM.Domain.Exceptions {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MessagesExceptions {
+    public class MessagesExceptions {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MessagesExceptions() {
+        public MessagesExceptions() {
         }
         
         /// <summary>
         ///   Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RESERVATION_SYSTEM.Domain.Exceptions.MessagesExceptions", typeof(MessagesExceptions).Assembly);
@@ -51,7 +51,7 @@ namespace RESERVATION_SYSTEM.Domain.Exceptions {
         ///   búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace RESERVATION_SYSTEM.Domain.Exceptions {
         /// <summary>
         ///   Busca una cadena traducida similar a the customer name  is already created.
         /// </summary>
-        internal static string NameCustomerNotValid {
+        public static string NameCustomerNotValid {
             get {
                 return ResourceManager.GetString("NameCustomerNotValid", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace RESERVATION_SYSTEM.Domain.Exceptions {
         /// <summary>
         ///   Busca una cadena traducida similar a the service name  is already created.
         /// </summary>
-        internal static string NameServiceNotValid {
+        public static string NameServiceNotValid {
             get {
                 return ResourceManager.GetString("NameServiceNotValid", resourceCulture);
             }
